@@ -1,0 +1,3 @@
+// Thư mục chứa các component tái sử dụng (ProductCard, SearchBar, Pagination...)
+export {};
+
