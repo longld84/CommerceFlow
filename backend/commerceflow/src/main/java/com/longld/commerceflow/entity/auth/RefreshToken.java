@@ -1,6 +1,6 @@
 package com.longld.commerceflow.entity.auth;
 
-import com.longld.commerceflow.entity.user.Users;
+import com.longld.commerceflow.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "refresh_tokens", indexes = {
         @Index(name = "idx_refresh_tokens_token", columnList = "token")
 })
-public class RefreshTokens {
+public class RefreshToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class RefreshTokens {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @Column(name = "token", unique = true, nullable = false, length = 500)
     private String token;

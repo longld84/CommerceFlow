@@ -1,14 +1,14 @@
 package com.longld.commerceflow.entity.user;
 
 import com.longld.commerceflow.entity.BaseEntity;
-import com.longld.commerceflow.entity.auth.RefreshTokens;
-import com.longld.commerceflow.entity.cart.Carts;
-import com.longld.commerceflow.entity.conversation.Conversations;
-import com.longld.commerceflow.entity.notification.Notifications;
-import com.longld.commerceflow.entity.order.Orders;
-import com.longld.commerceflow.entity.promotion.CouponUsages;
-import com.longld.commerceflow.entity.review.Reviews;
-import com.longld.commerceflow.entity.wishlist.Wishlists;
+import com.longld.commerceflow.entity.auth.RefreshToken;
+import com.longld.commerceflow.entity.cart.Cart;
+import com.longld.commerceflow.entity.conversation.Conversation;
+import com.longld.commerceflow.entity.notification.Notification;
+import com.longld.commerceflow.entity.order.Order;
+import com.longld.commerceflow.entity.promotion.CouponUsage;
+import com.longld.commerceflow.entity.review.Review;
+import com.longld.commerceflow.entity.wishlist.Wishlist;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +24,7 @@ import java.util.List;
 @Table(name = "users", indexes = {
         @Index(name = "idx_users_email", columnList = "email")
 })
-public class Users extends BaseEntity {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,35 +60,35 @@ public class Users extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<RefreshTokens> refreshTokens = new ArrayList<>();
+    private List<RefreshToken> refreshTokens = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<UserAddress> addresses = new ArrayList<>();
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Carts cart;
+    private Cart cart;
 
     @OneToMany(mappedBy = "user")
     @Builder.Default
-    private List<Orders> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     @Builder.Default
-    private List<Reviews> reviews = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Notifications> notifications = new ArrayList<>();
+    private List<Notification> notifications = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     @Builder.Default
-    private List<CouponUsages> couponUsages = new ArrayList<>();
+    private List<CouponUsage> couponUsages = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Wishlists> wishlists = new ArrayList<>();
+    private List<Wishlist> wishlists = new ArrayList<>();
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Conversations conversation;
+    private Conversation conversation;
 }

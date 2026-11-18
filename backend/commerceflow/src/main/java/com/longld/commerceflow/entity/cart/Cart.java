@@ -1,6 +1,6 @@
 package com.longld.commerceflow.entity.cart;
 
-import com.longld.commerceflow.entity.user.Users;
+import com.longld.commerceflow.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "carts")
-public class Carts {
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class Carts {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", unique = true, nullable = false)
-    private Users user;
+    private User user;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
@@ -32,5 +32,5 @@ public class Carts {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<CartItems> items = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 }

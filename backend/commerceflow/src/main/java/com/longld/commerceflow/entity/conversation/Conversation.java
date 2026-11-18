@@ -1,6 +1,6 @@
 package com.longld.commerceflow.entity.conversation;
 
-import com.longld.commerceflow.entity.user.Users;
+import com.longld.commerceflow.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "conversations")
-public class Conversations {
+public class Conversation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class Conversations {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", unique = true, nullable = false)
-    private Users customer;
+    private User customer;
 
     @Column(name = "last_message_content", columnDefinition = "TEXT")
     private String lastMessageContent;
@@ -46,6 +46,6 @@ public class Conversations {
 
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Messages> messages = new ArrayList<>();
+    private List<Message> messages = new ArrayList<>();
 }
 

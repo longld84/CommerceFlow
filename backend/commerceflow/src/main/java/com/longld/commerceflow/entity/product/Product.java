@@ -1,8 +1,8 @@
 package com.longld.commerceflow.entity.product;
 
 import com.longld.commerceflow.entity.BaseEntity;
-import com.longld.commerceflow.entity.category.Categories;
-import com.longld.commerceflow.entity.review.Reviews;
+import com.longld.commerceflow.entity.category.Category;
+import com.longld.commerceflow.entity.review.Review;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +20,7 @@ import java.util.List;
         @Index(name = "idx_products_slug", columnList = "slug")
 })
 //thông tin chung sp
-public class Products extends BaseEntity {
+public class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Products extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    private Categories category;
+    private Category category;
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;
@@ -54,13 +54,13 @@ public class Products extends BaseEntity {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<ProductVariants> variants = new ArrayList<>();
+    private List<ProductVariant> variants = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<ProductImages> images = new ArrayList<>();
+    private List<ProductImage> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
     @Builder.Default
-    private List<Reviews> reviews = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 }

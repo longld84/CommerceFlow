@@ -1,7 +1,7 @@
 package com.longld.commerceflow.entity.category;
 
 import com.longld.commerceflow.entity.BaseEntity;
-import com.longld.commerceflow.entity.product.Products;
+import com.longld.commerceflow.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +18,7 @@ import java.util.List;
         @Index(name = "idx_categories_slug", columnList = "slug")
 })
 //loại sp
-public class Categories extends BaseEntity {
+public class Category extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +26,11 @@ public class Categories extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Categories parent;
+    private Category parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @Builder.Default
-    private List<Categories> children = new ArrayList<>();
+    private List<Category> children = new ArrayList<>();
 
     @Column(name = "name", nullable = false, length = 150)
     private String name;
@@ -46,5 +46,5 @@ public class Categories extends BaseEntity {
 
     @OneToMany(mappedBy = "category")
     @Builder.Default
-    private List<Products> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 }

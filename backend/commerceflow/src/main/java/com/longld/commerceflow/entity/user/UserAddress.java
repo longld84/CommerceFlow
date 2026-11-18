@@ -19,7 +19,7 @@ public class UserAddress extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @Column(name = "recipient_name", nullable = false, length = 150)
     private String recipientName;

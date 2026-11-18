@@ -1,6 +1,6 @@
 package com.longld.commerceflow.entity.order;
 
-import com.longld.commerceflow.entity.product.ProductVariants;
+import com.longld.commerceflow.entity.product.ProductVariant;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Table(name = "order_items")
-public class OrderItems {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,11 @@ public class OrderItems {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    private Orders order;
+    private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_variant_id", nullable = false)
-    private ProductVariants productVariant;
+    private ProductVariant productVariant;
 
     @Column(name = "product_name", nullable = false, length = 255)
     private String productName;

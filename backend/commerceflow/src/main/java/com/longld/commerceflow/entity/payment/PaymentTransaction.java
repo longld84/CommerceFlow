@@ -1,7 +1,7 @@
 package com.longld.commerceflow.entity.payment;
 
 import com.longld.commerceflow.entity.BaseEntity;
-import com.longld.commerceflow.entity.order.Orders;
+import com.longld.commerceflow.entity.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "payment_transactions", indexes = {
         @Index(name = "idx_payos_order_code", columnList = "payos_order_code")
 })
-public class PaymentTransactions extends BaseEntity {
+public class PaymentTransaction extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class PaymentTransactions extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    private Orders order;
+    private Order order;
 
     @Column(name = "payos_order_code", unique = true, nullable = false)
     private Long payosOrderCode;

@@ -1,7 +1,7 @@
 package com.longld.commerceflow.entity.promotion;
 
-import com.longld.commerceflow.entity.order.Orders;
-import com.longld.commerceflow.entity.user.Users;
+import com.longld.commerceflow.entity.order.Order;
+import com.longld.commerceflow.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "coupon_usages")
 
-public class CouponUsages {
+public class CouponUsage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +24,15 @@ public class CouponUsages {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id", nullable = false)
-    private Coupons coupon;
+    private Coupon coupon;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    private Orders order;
+    private Order order;
 
     @CreationTimestamp
     @Column(name = "used_at", nullable = false, updatable = false)

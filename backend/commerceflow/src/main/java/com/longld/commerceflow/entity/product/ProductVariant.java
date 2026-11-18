@@ -16,7 +16,7 @@ import java.math.BigDecimal;
         @Index(name = "idx_product_variants_sku", columnList = "sku")
 })
 //biến thể màu sắc, kích thước, giá
-public class ProductVariants extends BaseEntity {
+public class ProductVariant extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class ProductVariants extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
-    private Products product;
+    private Product product;
 
     @Column(name = "sku", unique = true, nullable = false, length = 100)
     private String sku; //Stock Keeping Unit: mã định danh riêng của một sản phẩm

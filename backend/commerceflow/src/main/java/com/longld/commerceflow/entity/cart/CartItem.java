@@ -1,6 +1,6 @@
 package com.longld.commerceflow.entity.cart;
 
-import com.longld.commerceflow.entity.product.ProductVariants;
+import com.longld.commerceflow.entity.product.ProductVariant;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +13,7 @@ import lombok.*;
 @Table(name = "cart_items", uniqueConstraints = {
         @UniqueConstraint(name = "uk_cart_product_variant", columnNames = {"cart_id", "product_variant_id"})
 })
-public class CartItems {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,11 @@ public class CartItems {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
-    private Carts cart;
+    private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_variant_id", nullable = false)
-    private ProductVariants productVariant;
+    private ProductVariant productVariant;
 
     @Builder.Default
     @Column(name = "quantity", nullable = false)

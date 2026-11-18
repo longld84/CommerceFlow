@@ -1,9 +1,9 @@
 package com.longld.commerceflow.entity.order;
 
 import com.longld.commerceflow.entity.BaseEntity;
-import com.longld.commerceflow.entity.payment.PaymentTransactions;
-import com.longld.commerceflow.entity.promotion.Coupons;
-import com.longld.commerceflow.entity.user.Users;
+import com.longld.commerceflow.entity.payment.PaymentTransaction;
+import com.longld.commerceflow.entity.promotion.Coupon;
+import com.longld.commerceflow.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "orders", indexes = {
         @Index(name = "idx_orders_order_code", columnList = "order_code")
 })
-public class Orders extends BaseEntity {
+public class Order extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +31,11 @@ public class Orders extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
-    private Coupons coupon;
+    private Coupon coupon;
 
     @Column(name = "shipping_name", nullable = false, length = 150)
     private String shippingName;
@@ -79,13 +79,13 @@ public class Orders extends BaseEntity {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<OrderItems> items = new ArrayList<>();
+    private List<OrderItem> items = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<OrderStatusHistories> statusHistories = new ArrayList<>();
+    private List<OrderStatusHistory> statusHistories = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<PaymentTransactions> paymentTransactions = new ArrayList<>();
+    private List<PaymentTransaction> paymentTransactions = new ArrayList<>();
 }

@@ -1,7 +1,7 @@
 package com.longld.commerceflow.entity.promotion;
 
 import com.longld.commerceflow.entity.BaseEntity;
-import com.longld.commerceflow.entity.order.Orders;
+import com.longld.commerceflow.entity.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +20,7 @@ import java.util.List;
         @Index(name = "idx_coupons_code", columnList = "code")
 })
 //Mã giảm giá
-public class Coupons extends BaseEntity {
+public class Coupon extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,9 +62,9 @@ public class Coupons extends BaseEntity {
 
     @OneToMany(mappedBy = "coupon")
     @Builder.Default
-    private List<Orders> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "coupon")
     @Builder.Default
-    private List<CouponUsages> usages = new ArrayList<>();
+    private List<CouponUsage> usages = new ArrayList<>();
 }
